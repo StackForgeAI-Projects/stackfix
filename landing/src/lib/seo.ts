@@ -86,8 +86,8 @@ export function buildMetadata(opts: SeoOptions = {}): Metadata {
       images: [ogImage],
     },
     icons: {
-      icon: [{ url: "/stackfix/stackfix-logo.png", type: "image/png" }],
-      apple: [{ url: "/stackfix/stackfix-logo.png" }],
+      icon: [{ url: "/favicon.ico" }],
+      apple: [{ url: "/favicon.ico" }],
     },
     category: "technology",
   };

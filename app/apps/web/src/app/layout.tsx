@@ -9,7 +9,7 @@ const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" }
 export const metadata: Metadata = {
   title: "StackFix — Repair Management",
   description: "Repair shop management for Rwanda — tickets, invoices, MoMo payments.",
-  icons: { icon: "/favicon.png" },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
