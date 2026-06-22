@@ -4,7 +4,7 @@ import { stackfixSeoKeywords } from "@/lib/seo-keywords";
 import { absoluteUrl } from "@/lib/utils";
 
 export const GOOGLE_SITE_VERIFICATION =
-  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "1rCIS0Rb2RMxaG4jp0pH8r6lPo2IkA3hrqQEiNrc8-k";
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "Y815Z5t3SCHw_ZCVKKcvYlhZiTrd9UPrEQFzw90RD04";
 
 interface SeoOptions {
   absoluteTitle?: boolean;

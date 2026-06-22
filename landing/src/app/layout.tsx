@@ -38,9 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <GoogleAnalyticsTag />
       </head>
       <body className="bg-background text-foreground min-h-screen font-sans antialiased">
-        <GoogleAnalyticsTag />
         <a href="#main" className="skip-link">
           Skip to main content
         </a>
