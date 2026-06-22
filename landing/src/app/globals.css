@@ -1,0 +1,469 @@
+@import "tailwindcss";
+
+/*
+ * Clash Grotesk (Fontshare OFL) — self-hosted so headings always resolve to this face
+ * (external Fontshare CSS was unreliable vs CSP/cache/theme ordering).
+ */
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("/fonts/clash-grotesk/clash-grotesk-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("/fonts/clash-grotesk/clash-grotesk-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("/fonts/clash-grotesk/clash-grotesk-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("/fonts/clash-grotesk/clash-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ──────────────────────────────────────────────────────────
+   StackForgeAI design tokens — Naval-black + Electric green
+   Ported 1:1 from Lovable reference (src/styles.css)
+   ────────────────────────────────────────────────────────── */
+
+@theme inline {
+  --radius: 0.875rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+
+  /* Heading / display type: Clash Grotesk (loaded via layout). Use `font-display` or h1–h6 only. */
+  --font-display: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --animate-marquee: marquee 35s linear infinite;
+  --animate-float-slow: float-slow 8s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+  --animate-orbit: orbit 28s linear infinite;
+}
+
+:root {
+  /* Naval black base */
+  --background: oklch(0.18 0.025 240);
+  --foreground: oklch(0.97 0.01 200);
+
+  --surface: oklch(0.22 0.028 240);
+  --surface-elevated: oklch(0.26 0.03 240);
+
+  --card: oklch(0.22 0.028 240);
+  --card-foreground: oklch(0.97 0.01 200);
+  --popover: oklch(0.22 0.028 240);
+  --popover-foreground: oklch(0.97 0.01 200);
+
+  /* Electric green */
+  --primary: oklch(0.88 0.27 145);
+  --primary-foreground: oklch(0.16 0.025 240);
+
+  --secondary: oklch(0.28 0.03 240);
+  --secondary-foreground: oklch(0.97 0.01 200);
+  --muted: oklch(0.26 0.028 240);
+  --muted-foreground: oklch(0.72 0.02 220);
+  --accent: oklch(0.88 0.27 145);
+  --accent-foreground: oklch(0.16 0.025 240);
+
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 0);
+  --border: oklch(0.32 0.03 240);
+  --input: oklch(0.28 0.03 240);
+  --ring: oklch(0.88 0.27 145);
+
+  /* Electric green palette */
+  --green: oklch(0.88 0.27 145);
+  --green-bright: oklch(0.92 0.3 142);
+  --green-deep: oklch(0.62 0.22 148);
+
+  --gradient-hero:
+    radial-gradient(ellipse at top left, oklch(0.88 0.27 145 / 0.25), transparent 55%),
+    radial-gradient(ellipse at bottom right, oklch(0.55 0.2 200 / 0.28), transparent 60%),
+    linear-gradient(180deg, oklch(0.16 0.025 240), oklch(0.2 0.03 245));
+  --gradient-primary: linear-gradient(135deg, var(--green-bright), var(--green-deep));
+  --gradient-text: linear-gradient(135deg, oklch(0.97 0.01 200), oklch(0.88 0.27 145));
+  --gradient-card: linear-gradient(160deg, oklch(0.26 0.03 240 / 0.8), oklch(0.2 0.025 240 / 0.6));
+
+  --shadow-glow: 0 0 60px -10px oklch(0.88 0.27 145 / 0.5);
+  --shadow-glow-lg: 0 0 120px -20px oklch(0.88 0.27 145 / 0.55);
+  --shadow-elevated: 0 30px 80px -20px oklch(0.05 0.02 240 / 0.7);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+  html,
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: oklch(0.88 0.27 145 / 0.35);
+    color: var(--foreground);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+  /* Hide focus rings on mouse click but show for keyboard */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-green {
+    background: linear-gradient(135deg, var(--green-bright), var(--green-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, oklch(0.97 0.01 200 / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.97 0.01 200 / 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .bg-noise {
+    background-image: radial-gradient(oklch(0.97 0.01 200 / 0.03) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+  .glow-green {
+    box-shadow: var(--shadow-glow);
+  }
+  .glow-green-lg {
+    box-shadow: var(--shadow-glow-lg);
+  }
+  .glass {
+    background: oklch(0.22 0.028 240 / 0.55);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid oklch(0.97 0.01 200 / 0.08);
+  }
+  .ring-green {
+    box-shadow:
+      0 0 0 1px oklch(0.88 0.27 145 / 0.4),
+      0 0 40px oklch(0.88 0.27 145 / 0.25);
+  }
+  .gpu {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  /* Minimal button hover/press — applied to every CTA */
+  .btn-press {
+    transition:
+      transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 220ms ease,
+      border-color 220ms ease,
+      color 220ms ease;
+    will-change: transform;
+  }
+  .btn-press:hover {
+    transform: translateY(-1px);
+  }
+  .btn-press:active {
+    transform: translateY(0) scale(0.985);
+    transition-duration: 90ms;
+  }
+  .btn-press > .btn-arrow {
+    display: inline-block;
+    transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-press:hover > .btn-arrow {
+    transform: translateX(4px);
+  }
+  /* Outline / ghost button: subtle border + glow on hover (no scale jolt) */
+  .btn-ghost-hover {
+    position: relative;
+  }
+  .btn-ghost-hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 oklch(0.88 0.27 145 / 0);
+    transition:
+      box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 220ms ease;
+    pointer-events: none;
+  }
+  .btn-ghost-hover:hover {
+    border-color: oklch(0.88 0.27 145 / 0.55) !important;
+    background-color: oklch(0.88 0.27 145 / 0.06);
+  }
+  .btn-ghost-hover:hover::after {
+    box-shadow:
+      inset 0 0 0 1px oklch(0.88 0.27 145 / 0.45),
+      0 0 30px -6px oklch(0.88 0.27 145 / 0.45);
+  }
+  /* Overrides any Tailwind-generated `font-display` stack (e.g. stale fallbacks). */
+  .font-display {
+    font-family: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+/* ── Keyframes ───────────────────────────────────────────── */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -24px, 0);
+  }
+}
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+.animate-orbit {
+  animation: orbit 28s linear infinite;
+}
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+/* ── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee,
+  .animate-float-slow,
+  .animate-pulse-glow,
+  .animate-orbit {
+    animation: none !important;
+  }
+}
+
+/* ── Form autofill (keep dark theme) ───────────────────── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--foreground);
+  -webkit-box-shadow: 0 0 0px 1000px oklch(0.22 0.028 240 / 0.9) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ── Google Translate (hidden widget — language via nav only) ── */
+/* Keep mount in layout (NOT display:none) so Google can inject the combo. */
+.google-translate-root,
+#google_translate_element {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide Google top chrome injected outside our mount (e.g. “Select language” bar). */
+body > .skiptranslate:not(.google-translate-root),
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame,
+.skiptranslate iframe,
+.goog-te-menu-frame,
+.goog-te-menu2,
+.goog-te-balloon-frame,
+.goog-tooltip,
+/* Hide Google translate loading UI during page translation. */
+.goog-te-spinner-pos,
+.goog-te-spinner,
+.goog-te-spinner-animation,
+iframe[src*="translate.google"],
+iframe[src*="translate.googleapis"],
+#activity-indicator,
+#progress-bar,
+#progressbar,
+.VIpgJd-ZVi9od-aZ2wEe,
+.VIpgJd-ZVi9od-LgbsSe,
+.VIpgJd-ZVi9od-xl07Ob-lTBxed,
+#goog-gt-tt,
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-yAWNEb-L7lbkb,
+.VIpgJd-yAWNEb-L7lbkb div,
+.VIpgJd-yAWNEb-hSRGPd {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide gadget chrome; keep widget functional for cookie-driven translation. */
+.goog-te-gadget-icon,
+.goog-te-menu-value,
+.goog-te-menu-value span,
+.goog-te-menu-value img,
+#google_translate_element a,
+.goog-te-gadget-simple a {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.goog-te-combo {
+  position: absolute !important;
+  left: -9999px !important;
+  width: auto !important;
+  height: auto !important;
+  opacity: 0 !important;
+  pointer-events: auto !important;
+}
+
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+html.translated-ltr,
+html.translated-rtl {
+  margin-top: 0 !important;
+}
+
+/* ── Skip-to-content (a11y) ─────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: 0 0 0.5rem 0;
+  font-weight: 500;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}

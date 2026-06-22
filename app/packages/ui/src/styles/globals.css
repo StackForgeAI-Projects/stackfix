@@ -1,0 +1,314 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-ink: var(--ink);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+}
+
+:root {
+  --radius: 0.875rem;
+  /* SOP v1.0 brand tokens */
+  --brand: #00b341;
+  --brand-foreground: #07131c;
+  --ink: #0d1f12;
+
+  --background: #f9fafb;
+  --foreground: #111827;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+  --primary: #0d1f12;
+  --primary-foreground: #f9fafb;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #111827;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --accent: #f3f4f6;
+  --accent-foreground: #111827;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #00b341;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+  }
+  html[data-scroll-locked] {
+    overflow: hidden;
+    scrollbar-gutter: stable;
+  }
+  html[data-scroll-locked] body {
+    scrollbar-gutter: stable;
+  }
+  html,
+  body {
+    font-family: var(--font-sans);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+  }
+  /* Radix scroll-lock: html keeps the scrollbar track; body stops scrolling */
+  body[data-scroll-locked] {
+    overflow: hidden !important;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+  }
+}
+
+/* Modal overlays — explicit CSS so blur/dim always works (Safari, Firefox, Chrome) */
+@layer components {
+  .stackfix-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    background-color: rgba(13, 31, 18, 0.6);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 200ms ease;
+    pointer-events: auto;
+  }
+
+  .stackfix-modal-overlay[data-state="open"] {
+    opacity: 1;
+  }
+
+  .stackfix-modal-overlay[data-state="closed"] {
+    opacity: 0;
+  }
+
+  .stackfix-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    color: #111827;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .stackfix-btn-outline:hover:not(:disabled) {
+    background-color: #f9fafb;
+  }
+
+  .stackfix-btn-outline:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .stackfix-btn-destructive {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #ef4444;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+  }
+
+  .stackfix-btn-destructive:hover:not(:disabled) {
+    background-color: #dc2626;
+  }
+
+  .stackfix-btn-destructive:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .stackfix-form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .stackfix-form-input:focus {
+    border-color: #00b341;
+    box-shadow: 0 0 0 2px rgba(0, 179, 65, 0.15);
+  }
+
+  /* Repair status pills — explicit CSS so colors always apply (Tailwind cannot scan utils) */
+  .status-badge-pending {
+    background-color: #fff0e6;
+    color: #c45a11;
+  }
+
+  .status-badge-under-repair {
+    background-color: #e8f0fe;
+    color: #1a56db;
+  }
+
+  .status-badge-completed {
+    background-color: #e6f7ef;
+    color: #0d7a45;
+  }
+
+  .status-badge-picked-up {
+    background-color: #eef1f4;
+    color: #1e293b;
+  }
+
+  .status-badge-cancelled {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+
+  .payment-badge-paid {
+    background-color: #e6f7ef;
+    color: #0d7a45;
+  }
+
+  .payment-badge-unpaid {
+    background-color: #fff0e6;
+    color: #c45a11;
+  }
+
+  .payment-badge-partial {
+    background-color: #e8f0fe;
+    color: #1a56db;
+  }
+
+  .payment-badge-overdue {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+
+  .payment-badge-cancelled {
+    background-color: #eef1f4;
+    color: #64748b;
+  }
+
+  .message-badge-open {
+    background-color: #fff0e6;
+    color: #c45a11;
+  }
+
+  .message-badge-resolved {
+    background-color: #e6f7ef;
+    color: #0d7a45;
+  }
+
+  /* Confirm modals — fade only (no zoom / pop-down) */
+  .stackfix-confirm-dialog[data-state="open"],
+  .stackfix-confirm-dialog[data-state="closed"] {
+    animation: none !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .stackfix-confirm-dialog[data-state="open"] {
+    animation: stackfix-modal-fade-in 150ms ease-out !important;
+  }
+
+  .stackfix-confirm-dialog[data-state="closed"] {
+    animation: stackfix-modal-fade-out 120ms ease-in !important;
+  }
+
+  @keyframes stackfix-modal-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes stackfix-modal-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* Logout confirm — comfortable width on mobile; desktop stays compact */
+  .stackfix-logout-dialog {
+    width: calc(100vw - 3.5rem);
+    max-width: calc(100vw - 3.5rem);
+  }
+
+  .stackfix-logout-dialog-desc {
+    width: 100%;
+    max-width: none;
+  }
+
+  @media (min-width: 640px) {
+    .stackfix-logout-dialog {
+      width: calc(100% - 2rem);
+      max-width: 24rem;
+    }
+
+    .stackfix-logout-dialog-desc {
+      max-width: 280px;
+    }
+  }
+}

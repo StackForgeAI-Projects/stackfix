@@ -1,0 +1,200 @@
+/* StackFix sales landing — design tokens & utilities from stackfix-landingpage2-main */
+
+.stackfix-page {
+  --brand: oklch(0.88 0.24 145);
+  --brand-foreground: oklch(0.14 0.02 160);
+  --background: oklch(0.16 0.018 160);
+  --foreground: oklch(0.97 0.005 160);
+  --surface: oklch(0.2 0.02 160);
+  --surface-elevated: oklch(0.24 0.022 160);
+  --card: oklch(0.2 0.02 160);
+  --card-foreground: oklch(0.97 0.005 160);
+  --popover: oklch(0.2 0.02 160);
+  --popover-foreground: oklch(0.97 0.005 160);
+  --primary: oklch(0.88 0.24 145);
+  --primary-foreground: oklch(0.14 0.02 160);
+  --secondary: oklch(0.26 0.02 160);
+  --secondary-foreground: oklch(0.97 0.005 160);
+  --muted: oklch(0.24 0.018 160);
+  --muted-foreground: oklch(0.7 0.02 160);
+  --accent: oklch(0.3 0.025 160);
+  --accent-foreground: oklch(0.97 0.005 160);
+  --border: oklch(0.3 0.02 160 / 60%);
+  --input: oklch(0.3 0.02 160 / 60%);
+  --ring: oklch(0.88 0.24 145);
+
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      color-mix(in oklab, var(--brand) 18%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 100% 100%,
+      color-mix(in oklab, var(--brand) 8%, transparent),
+      transparent 60%
+    );
+  background-attachment: fixed;
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+}
+
+.stackfix-page .grid-bg {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--brand) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--brand) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black, transparent 80%);
+}
+
+.stackfix-page .text-brand {
+  color: var(--brand);
+}
+
+.stackfix-page .text-brand-glow {
+  color: var(--brand);
+  text-shadow: 0 0 40px color-mix(in oklab, var(--brand) 50%, transparent);
+}
+
+.stackfix-page .bg-brand {
+  background-color: var(--brand);
+}
+
+.stackfix-page .text-brand-foreground {
+  color: var(--brand-foreground);
+}
+
+.stackfix-page .bg-brand\/10 {
+  background-color: color-mix(in oklab, var(--brand) 10%, transparent);
+}
+
+.stackfix-page .bg-brand\/15 {
+  background-color: color-mix(in oklab, var(--brand) 15%, transparent);
+}
+
+.stackfix-page .bg-brand\/20 {
+  background-color: color-mix(in oklab, var(--brand) 20%, transparent);
+}
+
+.stackfix-page .border-brand\/40 {
+  border-color: color-mix(in oklab, var(--brand) 40%, transparent);
+}
+
+.stackfix-page .border-brand\/60 {
+  border-color: color-mix(in oklab, var(--brand) 60%, transparent);
+}
+
+.stackfix-page .hover\:border-brand\/40:hover {
+  border-color: color-mix(in oklab, var(--brand) 40%, transparent);
+}
+
+.stackfix-page .hover\:bg-brand\/20:hover {
+  background-color: color-mix(in oklab, var(--brand) 20%, transparent);
+}
+
+.stackfix-page .group:hover .group-hover\:bg-brand\/20 {
+  background-color: color-mix(in oklab, var(--brand) 20%, transparent);
+}
+
+.stackfix-page .ring-brand {
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--brand) 40%, transparent),
+    0 20px 80px -20px color-mix(in oklab, var(--brand) 35%, transparent);
+}
+
+.stackfix-page .glass {
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in oklab, var(--brand) 14%, transparent);
+}
+
+.stackfix-page .btn-brand {
+  background: var(--brand);
+  color: var(--brand-foreground);
+  box-shadow: 0 10px 30px -10px color-mix(in oklab, var(--brand) 60%, transparent);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.stackfix-page .btn-brand:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 14px 40px -12px color-mix(in oklab, var(--brand) 70%, transparent);
+}
+
+.stackfix-page .btn-ghost {
+  background: color-mix(in oklab, var(--surface) 60%, transparent);
+  border: 1px solid color-mix(in oklab, var(--brand) 18%, transparent);
+  color: var(--foreground);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.stackfix-page .btn-ghost:hover {
+  background: color-mix(in oklab, var(--brand) 8%, var(--surface));
+  border-color: color-mix(in oklab, var(--brand) 38%, transparent);
+}
+
+.stackfix-page .hover\:text-brand:hover {
+  color: var(--brand);
+}
+
+.stackfix-page .focus\:border-brand\/60:focus {
+  border-color: color-mix(in oklab, var(--brand) 60%, transparent);
+}
+
+.stackfix-page .focus\:ring-brand\/20:focus {
+  --tw-ring-color: color-mix(in oklab, var(--brand) 20%, transparent);
+}
+
+.stackfix-page .marquee {
+  animation: stackfix-marquee 38s linear infinite;
+}
+
+@keyframes stackfix-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.stackfix-page .fade-up {
+  animation: stackfix-fade-up 0.9s ease both;
+}
+
+@keyframes stackfix-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stackfix-page .marquee,
+  .stackfix-page .fade-up {
+    animation: none !important;
+  }
+}

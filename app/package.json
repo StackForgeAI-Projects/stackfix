@@ -1,0 +1,31 @@
+{
+  "name": "stackfix",
+  "private": true,
+  "scripts": {
+    "clean:cache": "bash scripts/clean-cache.sh",
+    "dev": "turbo dev",
+    "dev:clean": "pnpm clean:cache && turbo dev",
+    "build": "turbo build",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md,css}\"",
+    "db:generate": "pnpm --filter @stackfix/api db:generate",
+    "db:migrate": "pnpm --filter @stackfix/api db:migrate",
+    "db:seed": "pnpm --filter @stackfix/api db:seed",
+    "db:studio": "pnpm --filter @stackfix/api db:studio",
+    "docs:user-flow": "python3 scripts/generate-user-flow-docx.py",
+    "prepare": "husky || true"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.7.3",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  }
+}

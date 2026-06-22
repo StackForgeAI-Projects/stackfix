@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: stackfix-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: stackfix
+      POSTGRES_PASSWORD: stackfix_dev
+      POSTGRES_DB: stackfix
+    volumes:
+      - stackfix_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stackfix -d stackfix"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: stackfix-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - stackfix_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  translate:
+    build: ./services/translate
+    container_name: stackfix-translate
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    # PROD: deploy this service alongside API; set TRANSLATE_SERVICE_URL on API — see docs/PRODUCTION.md
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5001/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  stackfix_pg_data:
+  stackfix_redis_data:

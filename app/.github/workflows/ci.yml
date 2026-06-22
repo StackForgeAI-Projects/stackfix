@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: stackfix
+          POSTGRES_PASSWORD: stackfix_dev
+          POSTGRES_DB: stackfix
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://stackfix:stackfix_dev@localhost:5432/stackfix?schema=public
+      JWT_SECRET: ci-jwt-secret-minimum-sixty-four-characters-long-for-testing-purposes!!
+      JWT_REFRESH_SECRET: ci-refresh-secret-minimum-sixty-four-characters-long-for-testing!!
+      CORS_ORIGIN: http://localhost:3000
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm --filter @stackfix/api db:generate
+      - run: pnpm --filter @stackfix/api exec prisma migrate deploy
+      - run: pnpm --filter @stackfix/api db:seed
+
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build

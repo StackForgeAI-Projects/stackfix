@@ -1,0 +1,40 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea
+.vscode
+*.swp
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Dependencies & build (all packages)
+node_modules
+.pnpm-store
+.next
+out
+dist
+.turbo
+*.tsbuildinfo
+
+# Testing
+coverage
+playwright-report
+test-results
+
+# Prisma local DB
+apps/api/prisma/*.db
+apps/api/prisma/*.db-journal
+
+# TypeScript
+next-env.d.ts

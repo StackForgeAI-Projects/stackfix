@@ -1,0 +1,62 @@
+/** StackFix landing page — Rwanda & Africa repair-app discovery. */
+export const stackfixSeoKeywords: string[] = [
+  ...new Set([
+    "StackFix",
+    "StackFix repair app",
+    "repair app in Africa",
+    "repair app in Rwanda",
+    "repair management app Rwanda",
+    "repair shop software Africa",
+    "repair shop software Rwanda",
+    "workshop management system Rwanda",
+    "electronics repair software Africa",
+    "phone repair shop app Rwanda",
+    "Mobile Money repair payments",
+    "MTN MoMo repair shop",
+    "technician management software Africa",
+    "repair ticket system Rwanda",
+    "field service management Africa",
+    "repair business software Kigali",
+    "repair shop POS Rwanda",
+    "AI repair diagnostics Africa",
+    "StackForgeAI StackFix",
+    "StackFix FAQ",
+    "repair shop software free trial",
+    "MoMo USSD repair payments",
+    "repair ticket management Rwanda",
+  ]),
+];
+
+export const stackfixSchemaKnowsAbout: string[] = [
+  "Repair shop management",
+  "Electronics repair workflows",
+  "Mobile Money payments for businesses",
+  "Technician scheduling",
+  "Repair ticket tracking",
+  "Rwanda repair industry",
+  "Pan-African field service software",
+];
+
+/** ISO 3166-1 alpha-2 codes — Africa focus with European primary markets. */
+export const schemaAreaServedCountries = [
+  "RW",
+  "KE",
+  "UG",
+  "TZ",
+  "ET",
+  "NG",
+  "GH",
+  "ZA",
+  "SN",
+  "CI",
+  "EG",
+  "MA",
+  "GB",
+  "DE",
+  "FR",
+  "NL",
+  "BE",
+  "CH",
+  "AT",
+  "US",
+] as const;
